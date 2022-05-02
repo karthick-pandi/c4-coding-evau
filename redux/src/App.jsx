@@ -5,21 +5,25 @@ import { NewOrder } from "./components/NewOrder";
 import { Orders } from "./components/Orders";
 // import { ProtectedRoute } from "./components/ProtextedRoute";
 import { Link, Routes, Route } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function App() {
+  const user = useSelector((store) => store.isLoggedIn);
   return (
     <div className="App">
       <div>
         <Link className="nav-home" to="/">
           Home
         </Link>
-        {/* Show either login or logout below */}
-        <Link className="nav-logout" to="/logout">
-          Logout
-        </Link>
-        <Link className="nav-login" to="/login">
-          Login
-        </Link>
+        {user != null && user[1] === true ? (
+          <Link className="nav-logout" to="/logout">
+            Logout
+          </Link>
+        ) : (
+          <Link className="nav-login" to="/login">
+            Login
+          </Link>
+        )}
       </div>
 
       <Routes>
